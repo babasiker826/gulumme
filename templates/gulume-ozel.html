@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gülsüm'e Özel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/WvwpfPrt/1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animasyonlu kalpler */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b6b;
+            animation: float 6s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            animation: slideDown 1s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .love-letter {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.5s ease;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .love-letter h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+            font-size: 18px;
+        }
+
+        .counter-section {
+            background: rgba(255, 107, 107, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .counter {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #ff6b6b;
+        }
+
+        .counter-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .photo {
+            width: 100%;
+            height: 120px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            animation: slideUp 1s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .music-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+
+        .romantic-notes {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            animation: typewriter 3s steps(40) 1s both;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .special-heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animasyonlu kalpler -->
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Gülsüm'e Özel <span class="special-heart">🫀</span></h1>
+            <p style="opacity: 0.8; margin-top: 5px;">Sadece senin için...</p>
+        </div>
+
+        <!-- Aşk Mektubu -->
+        <div class="love-letter">
+            <h3>KURBAN OLDUĞUMM HAYATIMIN ANLAMII</h3>
+            <p>SENLE TANISDIĞIMIZDAN SEVGILI OLDUĞUMUZ GUNDEN BERI BEN GERCEKDEN BIR KALBIMIN OLDUĞUNU HISETDIM SEN BENIM HAYATIMIN KADINI ÖMRÜMÜN ISIĞI OLDUN.</p>
+            <p>SEN BENIM BU HAYATA SAHIP OLDUĞUM EN GUZEL SEYSIN SENI COK AMA COK SEVIYORUM PRENSESIM <span class="special-heart">🫀🥺</span></p>
+        </div>
+
+        <!-- Romantik Not -->
+        <div class="romantic-notes">
+            "Her geçen saniye seni daha çok seviyorum. Sen benim her şeyimsin..."
+        </div>
+
+        <!-- Beraber Geçirdiğimiz Süre -->
+        <div class="counter-section">
+            <div class="counter-label">BERABER GEÇİRDİĞİMİZ SÜRE</div>
+            <div class="counter" id="days">111</div>
+            <div class="counter-label">GÜN</div>
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                <div>
+                    <div class="counter" id="hours">00</div>
+                    <div class="counter-label">SAAT</div>
+                </div>
+                <div>
+                    <div class="counter" id="minutes">00</div>
+                    <div class="counter-label">DAKİKA</div>
+                </div>
+                <div>
+                    <div class="counter" id="seconds">00</div>
+                    <div class="counter-label">SANİYE</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Romantik Not 2 -->
+        <div class="romantic-notes">
+            "Gözlerin yıldızlar kadar güzel, gülüşün tüm dünyamı aydınlatıyor..."
+        </div>
+
+        <!-- Fotoğraf Galerisi -->
+        <div class="photos-grid">
+            <img src="https://i.ibb.co/Y7Qg0ZzP/benistee.jpg" alt="Biz" class="photo">
+            <img src="https://i.ibb.co/j987q6M0/e714c558-411e-481e-8ff7-e53a4f586db6.jpg" alt="Aşk" class="photo">
+            <img src="https://i.ibb.co/7dgSkTJs/image.jpg" alt="Mutluluk" class="photo">
+            <img src="https://i.ibb.co/ksMCBmrt/bcb938bd-5c73-4114-88d1-a5b72c487091.jpg" alt="Sevgi" class="photo">
+        </div>
+
+        <!-- Romantik Not 3 -->
+        <div class="romantic-notes">
+            "Seninle her anım bir rüya gibi... Uyanmak istemiyorum..."
+        </div>
+
+        <!-- Müzik Player -->
+        <div class="music-player">
+            <div class="music-title">🎵 Bizim Şarkımız</div>
+            <iframe 
+                allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
+                frameborder="0" 
+                height="175" 
+                style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" 
+                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
+                src="https://embed.music.apple.com/tr/song/maraz-ali-i-dil-keman/1773206597">
+            </iframe>
+        </div>
+
+        <!-- Romantik Not 4 -->
+        <div class="romantic-notes">
+            "Seni sevmek hayatımdaki en güzel alışkanlığım oldu..."
+        </div>
+    </div>
+
+    <div class="navigation">
+        <a href="/" class="nav-item">Ana sayfa</a>
+        <a href="#" class="nav-item">Arkadaşlar</a>
+        <a href="#" class="nav-item">Gelen kutusu</a>
+        <a href="#" class="nav-item">Profil</a>
+    </div>
+
+    <script>
+        // Animasyonlu kalpler oluşturma
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartCount = 15;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+
+                // Rastgele pozisyon ve animasyon
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = 4 + Math.random() * 4;
+
+                heart.style.left = `${left}%`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Gerçek zamanlı sayaç
+        function updateCounter() {
+            const startDate = new Date('2025-07-10T00:00:00'); // 10 Temmuz 2025
+            const now = new Date();
+
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Sayfa yüklendiğinde
+        window.addEventListener('load', function() {
+            createHearts();
+            updateCounter();
+            // Saniyede bir sayacı güncelle
+            setInterval(updateCounter, 1000);
+        });
+
+        // Fotoğraflara tıklanınca büyük göster (basit lightbox)
+        document.querySelectorAll('.photo').forEach(photo => {
+            photo.addEventListener('click', function() {
+                const originalSrc = this.src;
+                window.open(originalSrc, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
